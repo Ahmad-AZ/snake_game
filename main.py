@@ -28,19 +28,25 @@ while game_is_on:
     if snake.head.distance(food) < 20:
         food.refresh()
         snake.extends()
-        score.update_score()
+        score.increase_score()
 
     # Detect collision with wall
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        score.game_over()
-        game_is_on = False
+        #score.game_over()
+        score.reset()
+        snake.reset()
+
+        #game_is_on = False
 
     # snake.segments[::2] means keep everything in the list but hold for every second item
     # snake.segments[::-1] will reverse the list
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            score.game_over()
+            #game_is_on = False
+            #score.game_over()
+            snake.reset()
+            score.reset()
+
 
     screen.onkey(snake.up, "Up")
     screen.onkey(snake.down, "Down")
